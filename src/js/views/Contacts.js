@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 
 import { ContactCard } from "../component/ContactCard.js";
@@ -8,6 +8,41 @@ export const Contacts = () => {
 	const [state, setState] = useState({
 		showModal: false
 	});
+	const contacts = [
+		// {
+		// 	id: "1",
+		// 	agenda_slug: "mi_slug",
+		// 	email: "contact1@example.com",
+		// 	full_name: "Nombre del contacto 1",
+		// 	phone: "123456789",
+		// 	address: "Street name, 1, 12345 Province"
+		// },
+		// {
+		// 	id: "2",
+		// 	agenda_slug: "mi_slug",
+		// 	email: "contact2@example.com",
+		// 	full_name: "Nombre del contacto 2",
+		// 	phone: "123456789",
+		// 	address: "Street name, 1, 12345 Province"
+		// },
+		{
+			id: "3",
+			agenda_slug: "mi_slug",
+			email: "contact2@example.com",
+			full_name: "Nombre del contacto 2",
+			phone: "123456789",
+			address: "Street name, 1, 12345 Province"
+		}
+	];
+
+	const { actions, store } = useContext(Context);
+	useEffect(() => {
+		// actions.createContact();
+		// actions.getContact();
+		// actions.updateContact();
+		// actions.deleteContact();
+		actions.listContacts();
+	}, []);
 
 	return (
 		<div className="container">
@@ -19,6 +54,9 @@ export const Contacts = () => {
 				</p>
 				<div id="contacts" className="panel-collapse collapse show" aria-expanded="true">
 					<ul className="list-group pull-down" id="contact-list">
+						{contacts.map((contact, index) => {
+							<ContactCard data={contact} key={index} />;
+						})}
 						<ContactCard onDelete={() => setState({ showModal: true })} />
 						<ContactCard />
 						<ContactCard />
