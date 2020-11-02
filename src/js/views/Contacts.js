@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
+import { Context } from "../store/appContext.js";
 
 import { ContactCard } from "../component/ContactCard.js";
 import { Modal } from "../component/Modal";
@@ -54,10 +55,20 @@ export const Contacts = () => {
 				</p>
 				<div id="contacts" className="panel-collapse collapse show" aria-expanded="true">
 					<ul className="list-group pull-down" id="contact-list">
-						{contacts.map((contact, index) => {
-							<ContactCard data={contact} key={index} />;
+						{store.contacts.map((contact, index) => {
+							<ContactCard
+								data={contact}
+								key={index}
+								// contactName={contact.full_name}
+								// contactAddress={contact.address}
+								// contactPhone={contact.phone}
+								// contactEmail={contact.email}
+							/>;
 						})}
-						<ContactCard onDelete={() => setState({ showModal: true })} />
+						<ContactCard
+							onDelete={() => setState({ showModal: true })}
+							//  key={index}
+						/>
 						<ContactCard />
 						<ContactCard />
 						<ContactCard />
