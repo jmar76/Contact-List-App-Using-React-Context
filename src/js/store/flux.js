@@ -2,25 +2,24 @@ const getState = ({ getStore, setStore }) => {
 	return {
 		store: {
 			//Your data structures, A.K.A Entities
-			contacts: []
+			contacts: [],
 			//es un array. se recorre con .map()
+			agenda_slug: "Morena"
 		},
 		actions: {
 			//(Arrow) Functions that update the Store
 			// Remember to use the scope: scope.state.store & scope.setState()
 
 			createContact(data) {
+				const store = getStore();
 				console.log(data);
 				data = {
-					// "id": "1480",
-					// "agenda_slug": "Morena",
-					// "full_name":
-					// "email": "cmor@gmail.com",
-					// "phone": "7864445566",
-					// "address": "47568 NW 34ST, 33434 FL, USA",
-					// "created_at": "2020-10-28 19:18:40"
+					agenda_slug: store.agenda_slug,
+					email: "martadmdo@gmail.com",
+					full_name: "Marta de la Morena",
+					phone: "660156882",
+					address: "Calle única, 5b. Piedrafita de Jaca"
 				};
-				const store = getStore();
 				const endpoint = " https://assets.breatheco.de/apis/fake/contact/";
 				const config = {
 					method: "POST",
@@ -97,8 +96,9 @@ const getState = ({ getStore, setStore }) => {
 						console.error("Error:", error);
 					});
 			},
-			listContacts(slug) {
-				const endpoint = "https://assets.breatheco.de//apis/fake/contact/agenda/" + slug;
+			listContacts() {
+				const store = getStore();
+				const endpoint = "https://assets.breatheco.de/apis/fake/contact/agenda/" + store.agenda_slug;
 				const config = {
 					method: "GET"
 				};
@@ -109,6 +109,8 @@ const getState = ({ getStore, setStore }) => {
 					})
 					.then(json => {
 						console.log("JSON Response: ", json);
+						setStore({ contacts: json });
+						console.log(store.contacts);
 					})
 					.catch(error => {
 						console.error("Error:", error);

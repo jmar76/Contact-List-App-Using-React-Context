@@ -26,14 +26,14 @@ export const Contacts = () => {
 		// 	phone: "123456789",
 		// 	address: "Street name, 1, 12345 Province"
 		// },
-		{
-			id: "3",
-			agenda_slug: "mi_slug",
-			email: "contact2@example.com",
-			full_name: "Nombre del contacto 2",
-			phone: "123456789",
-			address: "Street name, 1, 12345 Province"
-		}
+		// {
+		// 	id: "3",
+		// 	agenda_slug: "mi_slug",
+		// 	email: "contact2@example.com",
+		// 	full_name: "Nombre del contacto 2",
+		// 	phone: "123456789",
+		// 	address: "Street name, 1, 12345 Province"
+		// }
 	];
 
 	const { actions, store } = useContext(Context);
@@ -43,6 +43,7 @@ export const Contacts = () => {
 		// actions.updateContact();
 		// actions.deleteContact();
 		actions.listContacts();
+		console.log("store desde contacts", store);
 	}, []);
 
 	return (
@@ -56,13 +57,16 @@ export const Contacts = () => {
 				<div id="contacts" className="panel-collapse collapse show" aria-expanded="true">
 					<ul className="list-group pull-down" id="contact-list">
 						{store.contacts.map((contact, index) => {
+							{
+								console.log("contact desde el map", contact);
+							}
 							<ContactCard
-								data={contact}
+								// data={contact}
 								key={index}
-								// contactName={contact.full_name}
-								// contactAddress={contact.address}
-								// contactPhone={contact.phone}
-								// contactEmail={contact.email}
+								contactName={contact.full_name}
+								contactAddress={contact.address}
+								contactPhone={contact.phone}
+								contactEmail={contact.email}
 							/>;
 						})}
 						<ContactCard
