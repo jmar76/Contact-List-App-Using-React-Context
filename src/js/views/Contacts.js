@@ -56,26 +56,17 @@ export const Contacts = () => {
 				</p>
 				<div id="contacts" className="panel-collapse collapse show" aria-expanded="true">
 					<ul className="list-group pull-down" id="contact-list">
-						{store.contacts.map((contact, index) => {
-							{
-								console.log("contact desde el map", contact);
-							}
+						{store.contacts.map((element, index) => (
 							<ContactCard
-								// data={contact}
+								onDelete={() => setState({ showModal: true })}
 								key={index}
-								contactName={contact.full_name}
-								contactAddress={contact.address}
-								contactPhone={contact.phone}
-								contactEmail={contact.email}
-							/>;
-						})}
-						<ContactCard
-							onDelete={() => setState({ showModal: true })}
-							//  key={index}
-						/>
-						<ContactCard />
-						<ContactCard />
-						<ContactCard />
+								contactName={element.full_name}
+								contactAddress={element.address}
+								contactPhone={element.phone}
+								contactEmail={element.email}
+								contactId={element.id}
+							/>
+						))}
 					</ul>
 				</div>
 			</div>

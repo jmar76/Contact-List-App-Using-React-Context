@@ -28,15 +28,15 @@ export const ContactCard = props => {
 					<label className="name lead">{props.contactName}</label>
 					<br />
 					<i className="fas fa-map-marker-alt text-muted mr-3" />
-					<span className="text-muted"></span>
+					<span className="text-muted">{props.contactAddress}</span>
 					<br />
 					<span
 						className="fa fa-phone fa-fw text-muted mr-3"
 						data-toggle="tooltip"
 						title=""
-						data-original-title="(870) 288-4149"
+						data-original-title={props.contactPhone}
 					/>
-					<span className="text-muted small">(870) 288-4149</span>
+					<span className="text-muted small">{props.contactPhone}</span>
 					<br />
 					<span
 						className="fa fa-envelope fa-fw text-muted mr-3"
@@ -44,7 +44,7 @@ export const ContactCard = props => {
 						data-original-title=""
 						title=""
 					/>
-					<span className="text-muted small text-truncate">mike.ana@example.com</span>
+					<span className="text-muted small text-truncate">{props.contactEmail}</span>
 				</div>
 			</div>
 		</li>

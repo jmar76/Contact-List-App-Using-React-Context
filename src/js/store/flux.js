@@ -11,7 +11,7 @@ const getState = ({ getStore, setStore }) => {
 			// Remember to use the scope: scope.state.store & scope.setState()
 
 			createContact(data) {
-				const store = getStore();
+				const store = getStore(); //no hace falta porque no necesita cambiar nada del store
 				console.log(data);
 				data = {
 					agenda_slug: store.agenda_slug,
