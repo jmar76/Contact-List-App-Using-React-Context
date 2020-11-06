@@ -4,36 +4,64 @@ import { Link } from "react-router-dom";
 import { Context } from "../store/appContext.js";
 
 export const AddContact = () => {
-
 	const { actions, store } = useContext(Context);
 	//defino cada clave como variable de estado
-	const [newName, setNewName] = useState();
-	// const [phone, setPhone] = useState();
-    // const [email, setEmail] = useState();
-    // const [address, setAddress] = useState();
+	const [name, setName] = useState("");
+	const [phone, setPhone] = useState("");
+	const [email, setEmail] = useState("");
+	const [address, setAddress] = useState("");
 
-	// useEffect(() => {
-	// 	console.log("nombre", name);
-	// 	console.log("phone", phone);
-	// 	console.log("email", email);
-	// });
+	useEffect(() => {
+		console.log("nombre", name);
+		// console.log("phone", phone);
+		// console.log("email", email);
+	});
 
 	//hago un onchange en cada imput que setee su valor
-	const handleChangeName = event => setNewName(event.target.value);
+	const handleChangeName = event => setName(event.target.value);
 	const handleChangePhone = event => setPhone(event.target.value);
 	const handleChangeEmail = event => setEmail(event.target.value);
 	const handleChangeAddress = event => setAddress(event.target.value);
 
-	const saveContact = event => {
-		const newContact = {
-			full_name: newName,
-			address: newAdress,
-			phone: newPhone,
-			email: newEmail
-        },
-        actions.createContact(newContact),
-        actions.listConstact(),
+	useEffect(() => {
+		console.log("name despues del handleChangeName ", name);
+	}, []);
+
+	const [newContact, setNewContact] = useState({
+		full_name: "",
+		address: "",
+		phone: "",
+		email: "",
+		agenda_slug: "Morena"
+	});
+	const handleSaveContact = event => {
+		setNewContact({
+			full_name: name,
+			address: address,
+			phone: phone,
+			email: email,
+			agenda_slug: "Morena"
+		});
+		console.log("save contact", newContact);
+
+		actions.createContact(newContact);
+		setName("");
 	};
+
+	// console.log(setNewContact());
+	// 	const newContact = {
+	// 		full_name: name,
+	// 		address: adress,
+	// 		phone: phone,
+	// 		email: email,
+	// 		agenda_slug: "Morena"
+	// 	};
+	// };
+	// actions.createContact(newContact),
+	// actions.listConstact(),
+	// setNewName("");
+	// console.log("save contact", newContact);
+	// actions.createContact(newContact);
 
 	return (
 		<div className="container">
@@ -47,7 +75,7 @@ export const AddContact = () => {
 							className="form-control"
 							placeholder="Full Name"
 							onChange={handleChangeName}
-							value={newName}
+							value={name}
 						/>
 					</div>
 					<div className="form-group">
@@ -57,7 +85,7 @@ export const AddContact = () => {
 							className="form-control"
 							placeholder="Enter email"
 							onChange={handleChangeEmail}
-							value={newEmail}
+							value={email}
 						/>
 					</div>
 					<div className="form-group">
@@ -67,7 +95,7 @@ export const AddContact = () => {
 							className="form-control"
 							placeholder="Enter phone"
 							onChange={handleChangePhone}
-							value={newPhone}
+							value={phone}
 						/>
 					</div>
 					<div className="form-group">
@@ -77,10 +105,10 @@ export const AddContact = () => {
 							className="form-control"
 							placeholder="Enter address"
 							onChange={handleChangeAddress}
-							value={newAddress}
+							value={address}
 						/>
 					</div>
-					<button type="button" className="btn btn-primary form-control">
+					<button type="button" className="btn btn-primary form-control" onClick={handleSaveContact}>
 						save
 					</button>
 					<Link className="mt-3 w-100 text-center" to="/">
