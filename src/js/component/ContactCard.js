@@ -25,18 +25,18 @@ export const ContactCard = props => {
 							<i className="fas fa-trash-alt" />
 						</button>
 					</div>
-					<label className="name lead">{props.contactName}</label>
+					<label className="name lead">{props.data.full_name}</label>
 					<br />
 					<i className="fas fa-map-marker-alt text-muted mr-3" />
-					<span className="text-muted">{props.contactAddress}</span>
+					<span className="text-muted">{props.data.address}</span>
 					<br />
 					<span
 						className="fa fa-phone fa-fw text-muted mr-3"
 						data-toggle="tooltip"
 						title=""
-						data-original-title={props.contactPhone}
+						data-original-title={props.data.phone}
 					/>
-					<span className="text-muted small">{props.contactPhone}</span>
+					<span className="text-muted small">{props.data.phone}</span>
 					<br />
 					<span
 						className="fa fa-envelope fa-fw text-muted mr-3"
@@ -44,7 +44,7 @@ export const ContactCard = props => {
 						data-original-title=""
 						title=""
 					/>
-					<span className="text-muted small text-truncate">{props.contactEmail}</span>
+					<span className="text-muted small text-truncate">{props.data.email}</span>
 				</div>
 			</div>
 		</li>
@@ -58,11 +58,7 @@ export const ContactCard = props => {
 ContactCard.propTypes = {
 	history: PropTypes.object,
 	onDelete: PropTypes.func,
-	contactName: PropTypes.string,
-	contactAddress: PropTypes.string,
-	contactPhone: PropTypes.string,
-	contactEmail: PropTypes.string
-	// data: PropTypes.object
+	data: PropTypes.object
 };
 
 /**
@@ -70,9 +66,5 @@ ContactCard.propTypes = {
  * your component's properties
  **/
 ContactCard.defaultProps = {
-	onDelete: null,
-	contactName: "hola",
-	contactAddress: "",
-	contactPhone: "",
-	contactEmail: ""
+	onDelete: null
 };

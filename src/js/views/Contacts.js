@@ -9,32 +9,6 @@ export const Contacts = () => {
 	const [state, setState] = useState({
 		showModal: false
 	});
-	const contacts = [
-		// {
-		// 	id: "1",
-		// 	agenda_slug: "mi_slug",
-		// 	email: "contact1@example.com",
-		// 	full_name: "Nombre del contacto 1",
-		// 	phone: "123456789",
-		// 	address: "Street name, 1, 12345 Province"
-		// },
-		// {
-		// 	id: "2",
-		// 	agenda_slug: "mi_slug",
-		// 	email: "contact2@example.com",
-		// 	full_name: "Nombre del contacto 2",
-		// 	phone: "123456789",
-		// 	address: "Street name, 1, 12345 Province"
-		// },
-		// {
-		// 	id: "3",
-		// 	agenda_slug: "mi_slug",
-		// 	email: "contact2@example.com",
-		// 	full_name: "Nombre del contacto 2",
-		// 	phone: "123456789",
-		// 	address: "Street name, 1, 12345 Province"
-		// }
-	];
 
 	const { actions, store } = useContext(Context);
 	useEffect(() => {
@@ -43,7 +17,7 @@ export const Contacts = () => {
 		// actions.updateContact();
 		// actions.deleteContact();
 		actions.listContacts();
-		console.log("store desde contacts", store);
+		// console.log("store desde contacts", store);
 	}, []);
 
 	return (
@@ -57,15 +31,7 @@ export const Contacts = () => {
 				<div id="contacts" className="panel-collapse collapse show" aria-expanded="true">
 					<ul className="list-group pull-down" id="contact-list">
 						{store.contacts.map((element, index) => (
-							<ContactCard
-								onDelete={() => setState({ showModal: true })}
-								key={index}
-								contactName={element.full_name}
-								contactAddress={element.address}
-								contactPhone={element.phone}
-								contactEmail={element.email}
-								contactId={element.id}
-							/>
+							<ContactCard onDelete={() => setState({ showModal: true })} key={index} data={element} />
 						))}
 					</ul>
 				</div>

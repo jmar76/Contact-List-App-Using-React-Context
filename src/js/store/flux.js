@@ -13,18 +13,24 @@ const getState = ({ getStore, setStore }) => {
 			createContact(data) {
 				const store = getStore();
 				//no hace falta getStore() porque no necesita cambiar nada del store
-				console.log(data);
-				data = {
-					agenda_slug: store.agenda_slug,
-					email: "martadmdo@gmail.com",
-					full_name: "Marta de la Morena",
-					phone: "660156882",
-					address: "Calle única, 5b. Piedrafita de Jaca"
-				};
+				console.log("data desde createContact flux", data);
+				// data = {
+				// 	agenda_slug: store.agenda_slug,
+				// 	email: data.email,
+				// 	full_name: data.full_name,
+				// 	phone: data.phone,
+				// 	address: data.address
+				// };
 				const endpoint = " https://assets.breatheco.de/apis/fake/contact/";
 				const config = {
 					method: "POST",
-					body: JSON.stringify(data),
+					body: JSON.stringify({
+						full_name: data.full_name,
+						email: data.email,
+						agenda_slug: store.agenda_slug,
+						address: data.address,
+						phone: data.phone
+					}),
 					headers: {
 						"Content-Type": "application/json"
 					}
@@ -35,7 +41,9 @@ const getState = ({ getStore, setStore }) => {
 						return response.json();
 					})
 					.then(json => {
-						console.log("JSON Response: ", json);
+						getActions().listContacts(store.agenda_slug);
+						console.log("contacto guardado");
+						console.log("JSON Response (createContact) : ", json);
 					})
 					.catch(error => {
 						console.error("Error:", error);
@@ -109,9 +117,9 @@ const getState = ({ getStore, setStore }) => {
 						return response.json();
 					})
 					.then(json => {
-						console.log("JSON Response: ", json);
+						// console.log("(listContacts) JSON Response: ", json);
 						setStore({ contacts: json });
-						console.log(store.contacts);
+						console.log("listContacts", store.contacts);
 					})
 					.catch(error => {
 						console.error("Error:", error);
