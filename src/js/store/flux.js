@@ -4,6 +4,12 @@ const getState = ({ getStore, setStore }) => {
 			//Your data structures, A.K.A Entities
 			contacts: [],
 			//es un array. se recorre con .map()
+			user: {
+				full_name: null,
+				phone: null,
+				email: null,
+				address: null
+			},
 			agenda_slug: "Morena"
 		},
 		actions: {
@@ -14,23 +20,10 @@ const getState = ({ getStore, setStore }) => {
 				const store = getStore();
 				//no hace falta getStore() porque no necesita cambiar nada del store
 				console.log("data desde createContact flux", data);
-				// data = {
-				// 	agenda_slug: store.agenda_slug,
-				// 	email: data.email,
-				// 	full_name: data.full_name,
-				// 	phone: data.phone,
-				// 	address: data.address
-				// };
 				const endpoint = " https://assets.breatheco.de/apis/fake/contact/";
 				const config = {
 					method: "POST",
-					body: JSON.stringify({
-						full_name: data.full_name,
-						email: data.email,
-						agenda_slug: store.agenda_slug,
-						address: data.address,
-						phone: data.phone
-					}),
+					body: JSON.stringify(data),
 					headers: {
 						"Content-Type": "application/json"
 					}
@@ -41,9 +34,9 @@ const getState = ({ getStore, setStore }) => {
 						return response.json();
 					})
 					.then(json => {
+						console.log("JSON Response (createContact) : ", json);
 						getActions().listContacts(store.agenda_slug);
 						console.log("contacto guardado");
-						console.log("JSON Response (createContact) : ", json);
 					})
 					.catch(error => {
 						console.error("Error:", error);
@@ -105,9 +98,9 @@ const getState = ({ getStore, setStore }) => {
 						console.error("Error:", error);
 					});
 			},
-			listContacts() {
+			listContacts(slug) {
 				const store = getStore();
-				const endpoint = "https://assets.breatheco.de/apis/fake/contact/agenda/" + store.agenda_slug;
+				const endpoint = "https://assets.breatheco.de/apis/fake/contact/agenda/" + slug;
 				const config = {
 					method: "GET"
 				};
@@ -117,9 +110,16 @@ const getState = ({ getStore, setStore }) => {
 						return response.json();
 					})
 					.then(json => {
-						// console.log("(listContacts) JSON Response: ", json);
-						setStore({ contacts: json });
-						console.log("listContacts", store.contacts);
+						console.log(
+							"Desde listContacts. Estos son ahora tus contactos en la agenda (JSON Response): ",
+							json,
+							store.contacts
+						);
+						setStore({
+							contacts: json
+						});
+						//contacts es un array donde se me almacenarán todos los objetos (contactos nuevos)
+						// console.log("listContacts", store.contacts);
 					})
 					.catch(error => {
 						console.error("Error:", error);

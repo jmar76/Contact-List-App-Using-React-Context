@@ -16,7 +16,7 @@ export const Contacts = () => {
 		// actions.getContact();
 		// actions.updateContact();
 		// actions.deleteContact();
-		actions.listContacts();
+		actions.listContacts(store.agenda_slug);
 		// console.log("store desde contacts", store);
 	}, []);
 

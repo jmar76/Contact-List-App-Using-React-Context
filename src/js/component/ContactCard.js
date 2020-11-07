@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 // import { withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
-import MikePhoto from "../../img/m101.jpg";
+import MikePhoto from "../../img/rigo-baby.jpg";
 import { Context } from "../store/appContext.js";
 
 export const ContactCard = props => {
