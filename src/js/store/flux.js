@@ -1,15 +1,15 @@
-const getState = ({ getStore, setStore }) => {
+const getState = ({ getStore, setStore, getActions }) => {
 	return {
 		store: {
 			//Your data structures, A.K.A Entities
 			contacts: [],
 			//es un array. se recorre con .map()
-			user: {
-				full_name: null,
-				phone: null,
-				email: null,
-				address: null
-			},
+			// user: {
+			// 	full_name: null,
+			// 	phone: null,
+			// 	email: null,
+			// 	address: null
+			// },
 			agenda_slug: "Morena"
 		},
 		actions: {
@@ -82,6 +82,7 @@ const getState = ({ getStore, setStore }) => {
 					});
 			},
 			deleteContact(id) {
+				const store = getStore();
 				const endpoint = "https://assets.breatheco.de/apis/fake/contact/" + id;
 				const config = {
 					method: "DELETE"
@@ -92,7 +93,8 @@ const getState = ({ getStore, setStore }) => {
 						return response.json();
 					})
 					.then(json => {
-						console.log("JSON Response: ", json);
+						console.log("json desde deleteContact", json);
+						getActions().listContacts(store.agenda_slug);
 					})
 					.catch(error => {
 						console.error("Error:", error);
