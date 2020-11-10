@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 import { Context } from "../store/appContext.js";
 
-export const AddContact = () => {
+export const UpdateContact = () => {
 	const { actions, store } = useContext(Context);
 
 	//DEFINO CADA CLAVE COMO VARIABLE CON ESTADO
@@ -61,25 +61,25 @@ export const AddContact = () => {
 	// });
 
 	// CONSTRUYO UN HANDLE PARA GUARDAR CONTACTO al escribir LOS IMPUT
-	// const handleSaveContact = event => {
-	// 	const newContact = {
-	// 		full_name: name,
-	// 		address: address,
-	// 		phone: phone,
-	// 		email: email,
-	// 		agenda_slug: store.agenda_slug
-	// 	};
-	// 	console.log("save contact", newContact);
+	const handleSaveContact = event => {
+		const newContact = {
+			full_name: name,
+			address: address,
+			phone: phone,
+			email: email,
+			agenda_slug: store.agenda_slug
+		};
+		console.log("save contact", newContact);
 
-	// 	actions.createContact(newContact);
-	// 	alert("Tu contacto " + newContact.full_name + " ha sido editado");
-	// 	// setName("");
-	// };
+		actions.createContact(newContact);
+		alert("Tu contacto " + newContact.full_name + " ha sido creado");
+		// setName("");
+	};
 
 	return (
 		<div className="container">
 			<div>
-				<h1 className="text-center mt-5">Add a new contact</h1>
+				<h1 className="text-center mt-5">Edit an existing contact</h1>
 				<form>
 					<div className="form-group">
 						<label>Full Name</label>
