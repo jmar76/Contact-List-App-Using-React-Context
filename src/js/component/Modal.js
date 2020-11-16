@@ -42,7 +42,11 @@ export const Modal = props => {
 							type="button"
 							className="btn btn-secondary"
 							data-dismiss="modal"
-							onClick={() => actions.deleteContact(props.data.id)}>
+							onClick={() => {
+								actions.deleteContact(props.data.id);
+								props.onClose();
+							}}>
+							{/* como añadir tb props.onClose()??? */}
 							Do it!
 						</button>
 					</div>
