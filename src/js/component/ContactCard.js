@@ -7,9 +7,10 @@ import { Context } from "../store/appContext.js";
 
 export const ContactCard = props => {
 	const { actions, store } = useContext(Context);
-	// useEffect(() => {
-	// 	actions.createContact();
-	// }, []);
+	useEffect(() => {
+		// actions.createContact();
+		console.log(props.data.id);
+	}, []);
 
 	return (
 		<li className="list-group-item">
@@ -19,7 +20,7 @@ export const ContactCard = props => {
 				</div>
 				<div className="col-12 col-sm-6 col-md-9 text-center text-sm-left">
 					<div className=" float-right">
-						<Link to="/edit">
+						<Link to={"/edit/" + props.data.id}>
 							<button className="btn">
 								<i className="fas fa-pencil-alt mr-3" />
 							</button>

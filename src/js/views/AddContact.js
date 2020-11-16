@@ -13,15 +13,6 @@ export const AddContact = () => {
 	const [email, setEmail] = useState("");
 	const [address, setAddress] = useState("");
 
-	// const [data, setData] = useState({
-	// 	full_name: "",
-	// 	phone: "",
-	// 	email: "",
-	// 	address: "",
-	// 	agenda_slug: "Morena"
-	// 	// agenda_slug: "Morena" ???????
-	// });
-
 	// useEffect(() => {
 	// 	console.log("data despues de declarar [data,setData]", data);
 	// 	// console.log("phone", data.phone);
@@ -35,30 +26,9 @@ export const AddContact = () => {
 	const handleChangeEmail = event => setEmail(event.target.value);
 	const handleChangeAddress = event => setAddress(event.target.value);
 
-	// const handleChangeData = event => {
-	// 	setData(event.target.value);
-	// 	// setData({ ...data, [event.target.name]: event.target.value });
-	// 	// setData(...data, event.target.value);
-	// 	// // setTodo([...todo, task])
-	// 	//  setValues({
-	// 	// ...form,
-	// 	// [e.target.name]: e.target.value
-	// 	// NO SE SI SE ESTÁ GUARDANDO EN DATA COMO UN OBJETO, EN SUS CLAVES CORRESPONDIENTES ????
-	// };
-
 	// useEffect(() => {
 	// 	console.log("data despues del handleChangeName ", data);
 	// }, []);
-
-	//DECLARO NUEVA VARIABLE PARA   ALMACENAR LOS DATOS DE LAS IMPUT
-
-	// const [newContact, setNewContact] = useState({
-	// 	full_name: "",
-	// 	address: "",
-	// 	phone: "",
-	// 	email: "",
-	// 	agenda_slug: "Morena"
-	// });
 
 	// CONSTRUYO UN HANDLE PARA GUARDAR CONTACTO al escribir LOS IMPUT
 	const handleSaveContact = event => {
@@ -72,8 +42,10 @@ export const AddContact = () => {
 		// 	console.log("save contact", newContact);
 
 		actions.createContact(newContact);
-		alert("Tu contacto " + newContact.full_name + " ha sido editado");
+		alert("Tu contacto " + newContact.full_name + " ha sido creado");
+		console.log(name);
 		// setName("");
+		// console.log('después de setName("")', name);
 	};
 
 	return (
