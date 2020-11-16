@@ -61,20 +61,20 @@ export const AddContact = () => {
 	// });
 
 	// CONSTRUYO UN HANDLE PARA GUARDAR CONTACTO al escribir LOS IMPUT
-	// const handleSaveContact = event => {
-	// 	const newContact = {
-	// 		full_name: name,
-	// 		address: address,
-	// 		phone: phone,
-	// 		email: email,
-	// 		agenda_slug: store.agenda_slug
-	// 	};
-	// 	console.log("save contact", newContact);
+	const handleSaveContact = event => {
+		const newContact = {
+			full_name: name,
+			address: address,
+			phone: phone,
+			email: email,
+			agenda_slug: store.agenda_slug
+		};
+		// 	console.log("save contact", newContact);
 
-	// 	actions.createContact(newContact);
-	// 	alert("Tu contacto " + newContact.full_name + " ha sido editado");
-	// 	// setName("");
-	// };
+		actions.createContact(newContact);
+		alert("Tu contacto " + newContact.full_name + " ha sido editado");
+		// setName("");
+	};
 
 	return (
 		<div className="container">
