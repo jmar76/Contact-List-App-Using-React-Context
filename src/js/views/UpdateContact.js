@@ -1,10 +1,11 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 import { Context } from "../store/appContext.js";
 
 export const UpdateContact = () => {
 	const { actions, store } = useContext(Context);
+	const params = useParams();
 
 	//DEFINO CADA CLAVE COMO VARIABLE CON ESTADO
 
