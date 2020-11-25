@@ -14,20 +14,23 @@ export const UpdateContact = () => {
 	const [email, setEmail] = useState("");
 	const [address, setAddress] = useState("");
 
-	// const [data, setData] = useState({
-	// 	full_name: "",
-	// 	phone: "",
-	// 	email: "",
-	// 	address: "",
-	// 	agenda_slug: "Morena"
-	// 	// agenda_slug: "Morena" ???????
-	// });
+	useEffect(() => {
+		if (params.id) {
+			// PARA MEZCLAR EL UPDATECONTACT.JS CON EL ADDCONTACT.JS
+			actions.getContact(params.id);
+		}
+		console.log("store.user.id: ", store.user.id);
+		console.log("params desde Update: ", params);
+	}, []);
 
-	// useEffect(() => {
-	// 	console.log("data despues de declarar [data,setData]", data);
-	// 	// console.log("phone", data.phone);
-	// 	// console.log("email", email);
-	// });
+	useEffect(() => {
+		if (params.id == store.user.id) {
+			setName(store.user.full_name);
+			setPhone(store.user.phone);
+			setEmail(store.user.email);
+			setAddress(store.user.address);
+		}
+	}, [store.user]);
 
 	//ONCHANGE CON CADA IMPUT PARA SETEAR VALOR CON SETX()
 
@@ -35,31 +38,6 @@ export const UpdateContact = () => {
 	const handleChangePhone = event => setPhone(event.target.value);
 	const handleChangeEmail = event => setEmail(event.target.value);
 	const handleChangeAddress = event => setAddress(event.target.value);
-
-	// const handleChangeData = event => {
-	// 	setData(event.target.value);
-	// 	// setData({ ...data, [event.target.name]: event.target.value });
-	// 	// setData(...data, event.target.value);
-	// 	// // setTodo([...todo, task])
-	// 	//  setValues({
-	// 	// ...form,
-	// 	// [e.target.name]: e.target.value
-	// 	// NO SE SI SE ESTÁ GUARDANDO EN DATA COMO UN OBJETO, EN SUS CLAVES CORRESPONDIENTES ????
-	// };
-
-	// useEffect(() => {
-	// 	console.log("data despues del handleChangeName ", data);
-	// }, []);
-
-	//DECLARO NUEVA VARIABLE PARA   ALMACENAR LOS DATOS DE LAS IMPUT
-
-	// const [newContact, setNewContact] = useState({
-	// 	full_name: "",
-	// 	address: "",
-	// 	phone: "",
-	// 	email: "",
-	// 	agenda_slug: "Morena"
-	// });
 
 	// CONSTRUYO UN HANDLE PARA GUARDAR CONTACTO al escribir LOS IMPUT
 	const handleSaveContact = event => {
@@ -70,11 +48,14 @@ export const UpdateContact = () => {
 			email: email,
 			agenda_slug: store.agenda_slug
 		};
-		console.log("save contact", newContact);
 
-		actions.createContact(newContact);
-		alert("Tu contacto " + newContact.full_name + " ha sido creado");
-		// setName("");
+		actions.updateContact(params.id, newContact); // SE USA PARAMS PARA INDICAR EL CONTACTO QUE ESTAMOS MODIFICANDO
+
+		alert("Tu contacto " + name + " ha sido editado");
+		setName("");
+		setPhone("");
+		setEmail("");
+		setAddress("");
 	};
 
 	return (
@@ -90,8 +71,6 @@ export const UpdateContact = () => {
 							placeholder="Full Name"
 							onChange={handleChangeName}
 							value={name}
-							//  onChange={handleChangeData}
-							// value={data.full_name}
 						/>
 					</div>
 					<div className="form-group">

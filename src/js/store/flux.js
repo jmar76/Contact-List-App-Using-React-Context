@@ -4,12 +4,12 @@ const getState = ({ getStore, setStore, getActions }) => {
 			//Your data structures, A.K.A Entities
 			contacts: [],
 			//es un array. se recorre con .map()
-			// user: {
-			// 	full_name: null,
-			// 	phone: null,
-			// 	email: null,
-			// 	address: null
-			// },
+			user: {
+				full_name: null,
+				phone: null,
+				email: null,
+				address: null
+			},
 			agenda_slug: "Morena"
 		},
 		actions: {
@@ -42,7 +42,8 @@ const getState = ({ getStore, setStore, getActions }) => {
 						console.error("Error:", error);
 					});
 			},
-			getContact(id, data) {
+			getContact(id) {
+				const store = getStore();
 				/*el parametro :id del endpoint tiene que reemplazarse por el parametro id de la función getContact */
 				const endpoint = "https://assets.breatheco.de/apis/fake/contact/" + id;
 				const config = {
@@ -54,7 +55,11 @@ const getState = ({ getStore, setStore, getActions }) => {
 						return response.json();
 					})
 					.then(json => {
-						console.log("JSON Response: ", json);
+						// console.log("JSON Response: ", json);
+						setStore({
+							user: json
+						});
+						console.log("store.user desde getContact del flux: ", store.user);
 					})
 					.catch(error => {
 						console.error("Error:", error);
@@ -76,6 +81,7 @@ const getState = ({ getStore, setStore, getActions }) => {
 					})
 					.then(json => {
 						console.log("JSON Response: ", json);
+						getActions().listContacts(store.agenda_slug);
 					})
 					.catch(error => {
 						console.error("Error:", error);

@@ -12,12 +12,7 @@ export const Contacts = () => {
 
 	const { actions, store } = useContext(Context);
 	useEffect(() => {
-		// actions.createContact();
-		// actions.getContact();
-		// actions.updateContact();
-		// actions.deleteContact();
 		actions.listContacts(store.agenda_slug);
-		// console.log("store desde contacts", store);
 	}, []);
 
 	return (
@@ -40,12 +35,7 @@ export const Contacts = () => {
 					</ul>
 				</div>
 			</div>
-			<Modal
-				show={state.showModal}
-				onClose={() => setState({ showModal: false })}
-				// user={element.id} como pasarle id para borrarlo
-				data={state.data}
-			/>
+			<Modal show={state.showModal} onClose={() => setState({ showModal: false })} data={state.data} />
 		</div>
 	);
 };
