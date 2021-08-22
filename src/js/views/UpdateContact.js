@@ -19,8 +19,6 @@ export const UpdateContact = () => {
 			// PARA MEZCLAR EL UPDATECONTACT.JS CON EL ADDCONTACT.JS
 			actions.getContact(params.id);
 		}
-		console.log("store.user.id: ", store.user.id);
-		console.log("params desde Update: ", params);
 	}, []);
 
 	useEffect(() => {

@@ -43,7 +43,7 @@ export const AddContact = () => {
 
 		actions.createContact(newContact);
 		alert("Tu contacto " + newContact.full_name + " ha sido creado");
-		console.log(name);
+
 		// setName("");
 		// console.log('después de setName("")', name);
 	};

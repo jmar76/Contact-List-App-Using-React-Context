@@ -19,7 +19,7 @@ const getState = ({ getStore, setStore, getActions }) => {
 			createContact(data) {
 				const store = getStore();
 				//no hace falta getStore() porque no necesita cambiar nada del store
-				console.log("data desde createContact flux", data);
+
 				const endpoint = " https://assets.breatheco.de/apis/fake/contact/";
 				const config = {
 					method: "POST",
@@ -34,13 +34,9 @@ const getState = ({ getStore, setStore, getActions }) => {
 						return response.json();
 					})
 					.then(json => {
-						console.log("JSON Response (createContact) : ", json);
 						getActions().listContacts(store.agenda_slug);
-						console.log("contacto guardado");
 					})
-					.catch(error => {
-						console.error("Error:", error);
-					});
+					.catch(error => {});
 			},
 			getContact(id) {
 				const store = getStore();
